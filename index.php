@@ -16,4 +16,3 @@
     ?>
   </body>
 </html>
-<?php var_dump($_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']);?>
