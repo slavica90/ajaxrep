@@ -7,7 +7,7 @@
       width: 154px;
     }
     
-    #brojki
+    .brojki
     {
       width: 31px;
     }
@@ -39,7 +39,10 @@
     
     $(document).ready(function(){
       
-      
+      $('.brojki').on('click', function(){
+        prv=$(this).val();
+        alert(prv);
+      });
         
 //         $('#brojki').on('click', function(){
 //           prv=$(this).val();
@@ -49,17 +52,38 @@
 //           op='+';
 //           
 //         });
+        $('#operatori').on('click',function(){
+          if((prv!=="")&&(op===""))
+          {
+           op=$(this).val();
+           console.log(op);
+           izraz=izraz+op;
+           $('#displaytext').val(izraz);
+          }
+        });
         
         
        $('#ednakvo').on('click', function(){
          prv=1;
         vtor=2;
-        op='+';
-         $.post("http://localhost/ajaxrep/presmetaj.php" , {prv:prv, vtor:vtor, op:op},
+        $.post("http://localhost/ajaxrep/presmetaj.php" , {prv:prv, vtor:vtor, op:op},
        function(data){
          alert(data);
        });
       });
+      
+      $('#clearall').on('click',function(){
+        prv="";
+        vtor="";
+        op="";
+         $('#displaytext').val("TEST");
+      });
+      
+       $('#clearchar').on('click',function(){
+         //da se naprave brisenje karakter po karakter
+       $('#displaytext').val("BRISI KARKTER PO KARAKTER");
+      });
+      
      
       
       
@@ -82,58 +106,58 @@
         <table border="1">
           <tr>
             <td>
-              <input type="button" id="brojki" value="1">
+              <input type="button" class="brojki" value="1">
             </td>
             <td>
-              <input type="button" id="brojki" value="2">
+              <input type="button" class="brojki" value="2">
             </td>
             <td>
-              <input type="button" id="brojki" value="3">
+              <input type="button" class="brojki" value="3">
             </td>
             <td>
-              <input type="button" id="operatori" value="+">
-            </td>
-          </tr>
-          
-          <tr>
-            <td>
-              <input type="button" id="brojki" value="4">
-            </td>
-            <td>
-              <input type="button" id="brojki" value="5">
-            </td>
-            <td>
-              <input type="button" id="brojki" value="6">
-            </td>
-            <td>
-              <input type="button" id="operatori" value="-">
+              <input type="button" class="operatori" value="+">
             </td>
           </tr>
           
           <tr>
             <td>
-              <input type="button" id="brojki" value="7">
+              <input type="button" class="brojki" value="4">
             </td>
             <td>
-              <input type="button" id="brojki" value="8">
+              <input type="button" class="brojki" value="5">
             </td>
             <td>
-              <input type="button" id="brojki" value="9">
+              <input type="button" class="brojki" value="6">
             </td>
             <td>
-              <input type="button" id="operatori" value="*">
+              <input type="button" class="operatori" value="-">
             </td>
           </tr>
           
           <tr>
             <td>
-              <input type="button" id="brojki" value="0">
+              <input type="button" class="brojki" value="7">
+            </td>
+            <td>
+              <input type="button" class="brojki" value="8">
+            </td>
+            <td>
+              <input type="button" class="brojki" value="9">
+            </td>
+            <td>
+              <input type="button" class="operatori" value="*">
+            </td>
+          </tr>
+          
+          <tr>
+            <td>
+              <input type="button" class="brojki" value="0">
             </td>
             <td colspan="2">
               <input type="button" id="ednakvo" value="=">
             </td>
             <td>
-              <input type="button" id="operatori" value="/">
+              <input type="button" class="operatori" value="/">
             </td>
           </tr>
           
