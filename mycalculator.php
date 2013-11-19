@@ -1,4 +1,4 @@
-<?php // $url = $_SERVER['SERVER_NAME'];?>
+<?php $url = $_SERVER['SERVER_NAME'];?>
 <html>
 <head>
   <style>
@@ -12,7 +12,7 @@
       width: 31px;
     }
     
-    #operatori
+    .operatori
     {
       width: 31px;
     }
@@ -37,8 +37,7 @@
     var vtor="";
     var op="";
     var izraz="";
-    var operatorsArray = [ "+", "-", "/", "*"];
-    
+       
     $(document).ready(function(){
       $('.brojki').on('click', function(){
        if(op === ""){
@@ -51,7 +50,6 @@
          {
           prv=prv+$(this).val();
           izraz=prv;
-          console.log(izraz);
           $('#displaytext').val(izraz);
          }
        }
@@ -65,7 +63,6 @@
          {
           vtor=vtor+$(this).val();
           izraz=izraz+$(this).val();
-          console.log(izraz);
           $('#displaytext').val(izraz);
          }
        }
@@ -85,7 +82,6 @@
           {
            op=$(this).val();
            izraz=izraz+op;
-           console.log(izraz);
            $('#displaytext').val(izraz);
           }
         });
@@ -102,7 +98,7 @@
             }
          else
            {
-              $.post("http://localhost/ajaxrep/presmetaj.php" , {prv:prv, vtor:vtor, op:op},
+              $.post("http://<?php echo $url;?>/ajaxrep/presmetaj.php" , {prv:prv, vtor:vtor, op:op},
               function(data){
               $('#displaytext').val(data);
               });
@@ -124,14 +120,12 @@
          if(op === "")
          {
            izraz=izraz.slice(0,-1);
-           console.log(izraz);
            $('#displaytext').val(izraz);
            prv=izraz;
          }
          else 
          {
            izraz=izraz.slice(0, -1);
-           console.log(izraz);
            $('#displaytext').val(izraz);
            if(izraz.indexOf(op) === -1)
            {
@@ -148,11 +142,7 @@
            }
          }
         });
-      
-     
-      
-      
-    });
+     });
   </script>
   
   
