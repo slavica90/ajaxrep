@@ -120,9 +120,19 @@
       });
       
        $('#clearchar').on('click',function(){
-         //da se naprave brisenje karakter po karakter
-       $('#displaytext').val("BRISI KARKTER PO KARAKTER");
-      });
+         if(op === "")
+         {
+           izraz=izraz.slice(0,-1);
+           console.log(izraz);
+           $('#displaytext').val(izraz);
+           prv=izraz;
+         }
+         else 
+         {
+           izraz=izraz.slice(0, -1);
+           
+         }
+        });
       
      
       
