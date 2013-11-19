@@ -37,6 +37,7 @@
     var vtor="";
     var op="";
     var izraz="";
+    var operatorsArray = [ "+", "-", "/", "*"];
     
     $(document).ready(function(){
       $('.brojki').on('click', function(){
@@ -83,8 +84,8 @@
           if((prv!=="")&&(op===""))
           {
            op=$(this).val();
-           console.log(op);
            izraz=izraz+op;
+           console.log(izraz);
            $('#displaytext').val(izraz);
           }
         });
@@ -130,7 +131,21 @@
          else 
          {
            izraz=izraz.slice(0, -1);
-           
+           console.log(izraz);
+           $('#displaytext').val(izraz);
+           if(izraz.indexOf(op) === -1)
+           {
+             prv=izraz;
+             op="";
+             vtor="";
+           }
+           else
+           {
+             pozicija=izraz.indexOf(op); // na koe mesto se naoga operatorot
+             dolzina=izraz.length; //kolku e dolg izrazot
+             prv=izraz.substring(0, pozicija); // pocetna i krajna pozicija
+             vtor=izraz.substr(pozicija+1,dolzina-pozicija);
+           }
          }
         });
       
