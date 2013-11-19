@@ -33,16 +33,43 @@
   
   <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
   <script type="text/javascript">
-    var prv;
-    var vtor;
-    var op;
+    var prv="";
+    var vtor="";
+    var op="";
+    var izraz="";
     
     $(document).ready(function(){
-      
       $('.brojki').on('click', function(){
-        prv=$(this).val();
-        alert(prv);
-      });
+       if(op === ""){
+         if(prv === "0" )
+         {
+           izraz=prv;
+           $('#displaytext').val(izraz);
+         }
+         else
+         {
+          prv=prv+$(this).val();
+          izraz=prv;
+          console.log(izraz);
+          $('#displaytext').val(izraz);
+         }
+       }
+       else if (op !== "")
+       {
+         if(vtor === "0" )
+         {
+          $('#displaytext').val(izraz);
+         }
+       else
+         {
+          vtor=vtor+$(this).val();
+          izraz=izraz+$(this).val();
+          console.log(izraz);
+          $('#displaytext').val(izraz);
+         }
+       }
+         
+     });
         
 //         $('#brojki').on('click', function(){
 //           prv=$(this).val();
@@ -52,7 +79,7 @@
 //           op='+';
 //           
 //         });
-        $('#operatori').on('click',function(){
+        $('.operatori').on('click',function(){
           if((prv!=="")&&(op===""))
           {
            op=$(this).val();
@@ -64,19 +91,32 @@
         
         
        $('#ednakvo').on('click', function(){
-         prv=1;
-        vtor=2;
-        $.post("http://localhost/ajaxrep/presmetaj.php" , {prv:prv, vtor:vtor, op:op},
-       function(data){
-         alert(data);
-       });
+         if((op!=="") && (prv!=="") && (vtor !== "")){
+           if((op === "/") && (vtor === "0"))
+            {
+              $('#displaytext').val("Division by zero is undefined");
+                prv="";
+                vtor="";
+                op="";
+            }
+         else
+           {
+              $.post("http://localhost/ajaxrep/presmetaj.php" , {prv:prv, vtor:vtor, op:op},
+              function(data){
+              $('#displaytext').val(data);
+              });
+                prv="";
+                vtor="";
+                op="";
+           }
+         }
       });
       
       $('#clearall').on('click',function(){
         prv="";
         vtor="";
         op="";
-         $('#displaytext').val("TEST");
+         $('#displaytext').val("");
       });
       
        $('#clearchar').on('click',function(){
